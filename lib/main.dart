@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -33,10 +32,17 @@ class _MethodChannelImplementationState
     extends State<MethodChannelImplementation> {
   String batteryValue;
   static const batteryChannel = MethodChannel("battery");
+  static const dailyLimit = MethodChannel("dailyLimit");
 
   @override
   void initState() {
     super.initState();
+  }
+
+  void dailyUsage() async {
+    try {
+      var result = await dailyLimit.invokeMethod('getDailyUsage');
+    } on PlatformException catch (e) {}
   }
 
   void triggerChannel() async {
